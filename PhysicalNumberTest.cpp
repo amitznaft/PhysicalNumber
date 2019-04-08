@@ -23,7 +23,15 @@ int main() {
     PhysicalNumber b(300, Unit::M);
     PhysicalNumber c(2, Unit::HOUR);
     PhysicalNumber d(30, Unit::MIN);
-
+    // MY BASIC TESTS 
+    PhysicalNumber e(3, Unit::KM);
+    PhysicalNumber f(400, Unit::M);
+    PhysicalNumber j(450, Unit::CM);
+    PhysicalNumber g(3, Unit::HOUR);
+    PhysicalNumber h(40, Unit::MIN);
+    PhysicalNumber i(300, Unit::SEC);
+  
+    
     testcase
     .setname("Basic output")
     .CHECK_OUTPUT(a, "2[km]")
@@ -51,7 +59,52 @@ int main() {
 
     // YOUR TESTS - INSERT AS MANY AS YOU WANT
 
-      .setname("...")
+      .setname("My Basic output")
+      .CHECK_OUTPUT(e, "3[km]")
+      .CHECK_OUTPUT(f, "400[m]")
+      .CHECK_OUTPUT(g, "3[hour]")
+      .CHECK_OUTPUT(h, "40[min]")
+      .CHECK_OUTPUT(i, "300[sec]")
+      .CHECK_OUTPUT(j, "450[cm]")
+    //PhysicalNumber e(3, Unit::KM);
+    //PhysicalNumber f(400, Unit::M);
+    //PhysicalNumber j(450, Unit::CM);
+    //PhysicalNumber g(3, Unit::HOUR);
+    //PhysicalNumber h(40, Unit::MIN);
+    //PhysicalNumber i(300, Unit::SEC);
+      
+      
+      .setname("Compatible dimensions")
+      .CHECK_OUTPUT(f+e, "3400[m]")
+      .CHECK_OUTPUT((e+=f), "3.4[km]")
+      .CHECK_OUTPUT(e, "3.4[km]")
+      .CHECK_OUTPUT(e+e, "6.8[km]")
+      .CHECK_OUTPUT(j+f, "400450[cm]")
+      .CHECK_OUTPUT((f+=j), "400.450[m]")
+      .CHECK_OUTPUT(f, "400.450[m]")
+      .CHECK_OUTPUT(f-f, "0[m]")
+      .CHECK_OUTPUT(e-e, "0[km]")
+      .CHECK_OUTPUT(j-j, "0[km]")
+      .CHECK_OUTPUT(g+g, "6[hour]")
+      .CHECK_OUTPUT(h+h, "80[min]")
+      .CHECK_OUTPUT(i+i, "600[sec]") 
+      .CHECK_OUTPUT(h+g, "220[min]")
+      .CHECK_OUTPUT(h+i, "45[min]")
+      .CHECK_OUTPUT(h-i, "35[min]")
+      .CHECK_OUTPUT(g-g, "0[hour]")
+      .CHECK_OUTPUT(h-h, "0[min]")
+      .CHECK_OUTPUT(i-i, "0[sec]")
+      
+      .setname("Incompatible dimensions")
+      .CHECK_THROWS(e+g)
+      .CHECK_THROWS(e+h)
+      .CHECK_THROWS(e+i)
+      .CHECK_THROWS(f+g)
+      .CHECK_THROWS(f+h)
+      .CHECK_THROWS(f+i)
+      .CHECK_THROWS(j+g)
+      .CHECK_THROWS(j+h)
+      .CHECK_THROWS(j+i)
 
       .print(cout, /*show_grade=*/false);
       grade = testcase.grade();
