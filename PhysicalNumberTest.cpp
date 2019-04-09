@@ -87,7 +87,6 @@ int main() {
       .CHECK_OUTPUT(g+g, "6[hour]")
       .CHECK_OUTPUT(h+h, "80[min]")
       .CHECK_OUTPUT(i+i, "600[sec]") 
-      .CHECK_OUTPUT(, "600[sec]") 
       .CHECK_OUTPUT(h+g, "220[min]")
       .CHECK_OUTPUT(h+i, "45[min]")
       .CHECK_OUTPUT(h-i, "35[min]")
